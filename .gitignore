@@ -11,15 +11,17 @@ dist-ssr
 vite.config.js
 vite.config.d.ts
 
-# raw uploads kept locally, not in the repo (duplicates of public/videos & public/images)
+# raw uploads kept locally, not in the repo
+_raw-uploads/
 public/real state image/
 public/real state vedio/
 
-# scratch
+# helper scripts
 _serve_test.mjs
 _compress*.mjs
 _c3.mjs
 1-LOGIN-TO-GITHUB.bat
-
-1-LOGIN-TO-GITHUB.bat
 PUSH-TO-GITHUB.bat
+
+# NOTE: docs/ is the built, deployable site — it IS committed on purpose.
+BUILD.bat
