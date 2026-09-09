@@ -1,0 +1,291 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --base: #fafaf8;
+  --card: #ffffff;
+  --ink: #111111;
+  --muted: #666666;
+  --accent: #d8b46a;
+  --glass: rgba(255, 255, 255, 0.55);
+  color-scheme: light;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--base);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: rgba(216, 180, 106, 0.28);
+  color: var(--ink);
+}
+
+/* Hide native cursor only on fine pointers where the custom cursor runs */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* ---------- Typography helpers ---------- */
+.font-display {
+  font-family: 'Canela', 'PP Editorial New', 'Playfair Display', Georgia, serif;
+}
+
+.display-hero {
+  font-family: 'Canela', 'PP Editorial New', 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  font-size: clamp(1.9rem, 6vw, 6.75rem);
+}
+.hl-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+.hl-inner {
+  display: block;
+  white-space: nowrap;
+}
+
+.display-xl {
+  font-family: 'Canela', 'PP Editorial New', 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.25rem, 6.6vw, 6.25rem);
+}
+
+.display-lg {
+  font-family: 'Canela', 'PP Editorial New', 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.018em;
+  font-size: clamp(1.9rem, 4.4vw, 3.75rem);
+}
+
+.eyebrow {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.lead {
+  font-size: clamp(1rem, 1.35vw, 1.375rem);
+  line-height: 1.55;
+  color: var(--muted);
+  font-weight: 300;
+}
+
+.num {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* ---------- Surfaces ---------- */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 14px 34px -22px rgba(17, 17, 17, 0.1);
+}
+
+.hairline {
+  border: 1px solid var(--line);
+}
+
+.luxe-shadow {
+  box-shadow: 0 22px 50px -34px rgba(17, 17, 17, 0.18);
+}
+
+/* ---------- Split text ---------- */
+.reveal-line {
+  display: block;
+  overflow: hidden;
+}
+
+.reveal-word,
+.split-char {
+  display: inline-block;
+  will-change: transform;
+}
+
+.split-line {
+  display: block;
+  overflow: hidden;
+}
+
+/* ---------- Custom cursor ---------- */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: normal;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--accent);
+}
+
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 1px solid rgba(17, 17, 17, 0.35);
+  transition:
+    width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    margin 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease,
+    background-color 0.4s ease;
+}
+
+.cursor-ring.is-hover {
+  width: 74px;
+  height: 74px;
+  margin: -37px 0 0 -37px;
+  border-color: rgba(216, 180, 106, 0.9);
+  background: rgba(216, 180, 106, 0.08);
+}
+
+.cursor-ring.is-dark {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
+/* ---------- Misc ---------- */
+.will-reveal {
+  opacity: 0;
+}
+
+/* ---------- IO-driven stagger (rAF-independent) ---------- */
+.stagger > * {
+  opacity: 0;
+  translate: 0 42px;
+  transition:
+    opacity 0.9s ease,
+    translate 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stagger.is-in > * {
+  opacity: 1;
+  translate: 0 0;
+}
+.stagger.is-in > *:nth-child(1) { transition-delay: 0.04s; }
+.stagger.is-in > *:nth-child(2) { transition-delay: 0.12s; }
+.stagger.is-in > *:nth-child(3) { transition-delay: 0.2s; }
+.stagger.is-in > *:nth-child(4) { transition-delay: 0.28s; }
+.stagger.is-in > *:nth-child(5) { transition-delay: 0.36s; }
+.stagger.is-in > *:nth-child(6) { transition-delay: 0.44s; }
+.stagger.is-in > *:nth-child(7) { transition-delay: 0.52s; }
+.stagger.is-in > *:nth-child(8) { transition-delay: 0.6s; }
+
+.edge-fade-b {
+  -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+}
+
+/* ---------- Hero intro (CSS-driven, rAF-independent) ---------- */
+.hero-pin .display-hero .char {
+  display: inline-block;
+  transform: translateY(118%);
+  opacity: 0;
+  transition:
+    transform 1.15s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.7s ease;
+  transition-delay: calc(var(--i, 0) * 30ms);
+}
+.hero-pin.hero-in .display-hero .char {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.hero-eyebrow,
+.hero-sub,
+.hero-cta,
+.hero-hint {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.9s ease;
+}
+.hero-hint {
+  transform: translate(-50%, 20px);
+}
+.hero-pin.hero-in .hero-eyebrow {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+.hero-pin.hero-in .hero-sub {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.62s;
+}
+.hero-pin.hero-in .hero-cta {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.78s;
+}
+.hero-pin.hero-in .hero-hint {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  transition-delay: 1s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -1,0 +1,21 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+
+# TS build artefacts
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+
+# raw uploads kept locally, not in the repo (duplicates of public/videos & public/images)
+public/real state image/
+public/real state vedio/
+
+# scratch
+_serve_test.mjs
+_compress*.mjs
+_c3.mjs
